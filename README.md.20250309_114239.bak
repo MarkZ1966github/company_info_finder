@@ -37,8 +37,8 @@ A comprehensive tool for researching companies, their leadership, financials, an
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/MarkZ1966github/company_info_finder.git
-cd company_info_finder
+git clone https://github.com/yourusername/company-info-finder.git
+cd company-info-finder
 ```
 
 2. Install dependencies:
@@ -56,21 +56,6 @@ yarn dev
 ```
 
 4. Open your browser and navigate to [http://localhost:4000](http://localhost:4000)
-
-## Available Companies for Demo
-
-The following companies have mock data available:
-
-- Apple Inc.
-- Microsoft Corporation
-- Amazon.com Inc.
-- Alphabet Inc. (Google)
-- Meta Platforms Inc. (Facebook)
-- Tesla, Inc.
-- NVIDIA Corporation
-- JPMorgan Chase & Co.
-- Johnson & Johnson
-- Walmart Inc.
 
 ## Project Structure
 

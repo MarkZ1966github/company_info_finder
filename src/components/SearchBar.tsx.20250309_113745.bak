@@ -1,12 +1,24 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
-import { searchCompanies } from '@/services/companyService'
 
 interface SearchBarProps {
   onCompanySelect: (company: string) => void
 }
 
+// Mock data for companies - in a real app, this would come from an API
+const MOCK_COMPANIES = [
+  'Apple Inc.',
+  'Microsoft Corporation',
+  'Amazon.com Inc.',
+  'Alphabet Inc. (Google)',
+  'Meta Platforms Inc. (Facebook)',
+  'Tesla, Inc.',
+  'NVIDIA Corporation',
+  'JPMorgan Chase & Co.',
+  'Johnson & Johnson',
+  'Walmart Inc.'
+]
 
 export default function SearchBar({ onCompanySelect }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState('')
@@ -27,7 +39,7 @@ export default function SearchBar({ onCompanySelect }: SearchBarProps) {
     }
   }, [])
 
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchTerm(value)
     
@@ -37,16 +49,13 @@ export default function SearchBar({ onCompanySelect }: SearchBarProps) {
       return
     }
     
-    // Search companies using the service
-    try {
-      const results = await searchCompanies(value)
-      setSuggestions(results)
-      setShowSuggestions(results.length > 0)
-    } catch (error) {
-      console.error('Error searching companies:', error)
-      setSuggestions([])
-      setShowSuggestions(false)
-    }
+    // Filter companies based on search term
+    const filteredCompanies = MOCK_COMPANIES.filter(company => 
+      company.toLowerCase().includes(value.toLowerCase())
+    )
+    
+    setSuggestions(filteredCompanies)
+    setShowSuggestions(true)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
