@@ -6,6 +6,7 @@ export async function GET(request: Request) {
   // Parse the company name from the URL query parameters
   const url = new URL(request.url);
   const companyName = url.searchParams.get('company');
+  const website = url.searchParams.get('website');
   
   if (!companyName) {
     return NextResponse.json({ error: 'Company name is required' }, { status: 400 });
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
   
   try {
     // Get company data from our service
-    const data = await getCompanyData(companyName);
+    const data = await getCompanyData(companyName, website || undefined);
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error fetching company data:', error);

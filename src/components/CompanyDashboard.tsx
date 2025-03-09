@@ -10,12 +10,13 @@ import DataSourceAttribution from './DataSourceAttribution'
 import { getCompanyData } from '@/services/companyScraperService'
 
 interface CompanyDashboardProps {
-  companyName: string
+  companyName: string;
+  websiteUrl?: string;
 }
 
 // Company data is now managed by the companyService
 
-export default function CompanyDashboard({ companyName }: CompanyDashboardProps) {
+export default function CompanyDashboard({ companyName, websiteUrl }: CompanyDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview')
   const [companyData, setCompanyData] = useState<any>(null)
 
@@ -23,7 +24,7 @@ export default function CompanyDashboard({ companyName }: CompanyDashboardProps)
     const fetchData = async () => {
       try {
         // Fetch data using our service
-        const data = await getCompanyData(companyName);
+        const data = await getCompanyData(companyName, websiteUrl);
         setCompanyData(data);
       } catch (error) {
         console.error('Error fetching company data:', error);
@@ -59,12 +60,14 @@ export default function CompanyDashboard({ companyName }: CompanyDashboardProps)
     };
     
     fetchData();
-  }, [companyName])
+  }, [companyName, websiteUrl])
 
   if (!companyData) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
+      <div className="flex flex-col justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500 mb-4"></div>
+        <p className="text-gray-600">Searching for information about {companyName}...</p>
+        <p className="text-gray-500 text-sm mt-2">This may take a moment as we gather data from various sources</p>
       </div>
     )
   }

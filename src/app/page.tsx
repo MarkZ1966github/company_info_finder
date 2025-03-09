@@ -3,21 +3,23 @@
 import { useState } from 'react'
 import SearchBar from '@/components/SearchBar'
 import CompanyDashboard from '@/components/CompanyDashboard'
-import { getCompanyData } from '@/services/companyService'
+import { getCompanyData } from '@/services/companyScraperService'
 
 export default function Home() {
   const [selectedCompany, setSelectedCompany] = useState<string | null>(null)
+  const [website, setWebsite] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const handleCompanySelect = async (company: string) => {
+  const handleCompanySelect = async (company: string, websiteUrl?: string) => {
     if (!company.trim()) return;
     
     setIsLoading(true)
     setSelectedCompany(company)
+    setWebsite(websiteUrl || '')
     
     try {
       // Fetch company data using our service
-      await getCompanyData(company) // This pre-loads the data into our service cache
+      await getCompanyData(company, websiteUrl) // This pre-loads the data into our service cache
       setIsLoading(false)
     } catch (error) {
       console.error('Error fetching company data:', error)
@@ -38,7 +40,7 @@ export default function Home() {
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
         </div>
       ) : selectedCompany ? (
-        <CompanyDashboard companyName={selectedCompany} />
+        <CompanyDashboard companyName={selectedCompany} websiteUrl={website} />
       ) : (
         <div className="mt-16 text-center text-gray-500">
           <p className="text-xl">Search for a company to view detailed information</p>

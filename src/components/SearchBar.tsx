@@ -1,15 +1,16 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
-import { searchCompanies } from '@/services/companyService'
+import { searchCompanies } from '@/services/companyScraperService'
 
 interface SearchBarProps {
-  onCompanySelect: (company: string) => void
+  onCompanySelect: (company: string, website?: string) => void
 }
 
 
 export default function SearchBar({ onCompanySelect }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState('')
+  const [websiteUrl, setWebsiteUrl] = useState('')
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestionRef = useRef<HTMLDivElement>(null)
@@ -52,31 +53,39 @@ export default function SearchBar({ onCompanySelect }: SearchBarProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchTerm.trim() !== '') {
-      onCompanySelect(searchTerm)
+      onCompanySelect(searchTerm, websiteUrl.trim() || undefined)
       setShowSuggestions(false)
     }
   }
 
   const handleSuggestionClick = (company: string) => {
     setSearchTerm(company)
-    onCompanySelect(company)
+    onCompanySelect(company, websiteUrl.trim() || undefined)
     setShowSuggestions(false)
   }
 
   return (
     <div className="relative w-full max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="flex">
+      <div className="mb-2 text-sm text-gray-600">Enter a company name and optionally its website URL for better results</div>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearch}
           onFocus={() => searchTerm.trim() !== '' && setShowSuggestions(true)}
-          placeholder="Search for a company..."
-          className="w-full px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          placeholder="Search for a company (e.g., Apple, Tesla)..."
+          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        />
+        <input
+          type="text"
+          value={websiteUrl}
+          onChange={(e) => setWebsiteUrl(e.target.value)}
+          placeholder="Company website URL (optional, e.g., apple.com)..."
+          className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
         <button
           type="submit"
-          className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-r-lg transition duration-200"
+          className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg transition duration-200"
         >
           Search
         </button>
