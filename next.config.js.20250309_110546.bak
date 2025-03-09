@@ -1,0 +1,13 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  serverRuntimeConfig: {
+    PORT: '5001',
+  },
+  env: {
+    PORT: '5001',
+  },
+};
+
+module.exports = nextConfig;
