@@ -334,7 +334,7 @@ export const MOCK_COMPANY_DATA: Record<string, any> = {
     industry: 'Retail, E-commerce',
     employees: '2,100,000+',
     website: 'walmart.com',
-    description: 'Walmart Inc. engages in the operation of retail, wholesale, and other units worldwide. The company operates through three segments: Walmart U.S., Walmart International, and Sam's Club.',
+    description: 'Walmart Inc. engages in the operation of retail, wholesale, and other units worldwide. The company operates through three segments: Walmart U.S., Walmart International, and Sam\'s Club.',
     leadership: [
       { name: 'Doug McMillon', position: 'CEO', since: '2014' },
       { name: 'John David Rainey', position: 'CFO', since: '2022' },
