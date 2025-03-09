@@ -15,8 +15,6 @@ interface CompanyDashboardProps {
 
 // Company data is now managed by the companyService
 
-
-
 export default function CompanyDashboard({ companyName }: CompanyDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview')
   const [companyData, setCompanyData] = useState<any>(null)
@@ -114,5 +112,6 @@ export default function CompanyDashboard({ companyName }: CompanyDashboardProps)
         {/* Data Source Attribution */}
         {companyData.dataSources && <DataSourceAttribution sources={companyData.dataSources} />}
       </div>
+    </div>
   )
 }
