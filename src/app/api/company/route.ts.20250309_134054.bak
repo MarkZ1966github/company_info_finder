@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getCompanyData } from '@/services/companyScraperService';
+import { getCompanyData } from '@/services/companyService';
 
 // This is a simple API route that returns company data
 export async function GET(request: Request) {

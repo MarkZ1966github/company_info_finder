@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { searchCompanies } from '@/services/companyScraperService';
+import { searchCompanies } from '@/services/companyService';
 
 // This is a simple API route that returns company search results
 export async function GET(request: Request) {

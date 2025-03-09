@@ -1,6 +1,6 @@
 # Company Research Dashboard
 
-A comprehensive tool for researching companies, their leadership, financials, and predicting their future success or failure. This version includes live web scraping capabilities to gather real-time company data from public sources.
+A comprehensive tool for researching companies, their leadership, financials, and predicting their future success or failure.
 
 ## Features
 
@@ -55,11 +55,11 @@ npm run dev
 yarn dev
 ```
 
-4. Open your browser and navigate to [http://localhost:9999](http://localhost:9999)
+4. Open your browser and navigate to [http://localhost:3500](http://localhost:3500)
 
-## Available Companies
+## Available Companies for Demo
 
-The application can search for any company by scraping data from public sources. The following companies also have mock data available as fallbacks:
+The following companies have mock data available:
 
 - Apple Inc.
 - Microsoft Corporation
@@ -79,9 +79,6 @@ company-info-finder/
 ├── public/             # Static files
 ├── src/                # Source files
 │   ├── app/            # Next.js app directory
-│   │   ├── api/        # API routes
-│   │   │   ├── search/ # Company search API
-│   │   │   └── company/# Company data API
 │   │   ├── layout.tsx  # Root layout component
 │   │   ├── page.tsx    # Home page component
 │   │   └── globals.css # Global styles
@@ -92,11 +89,8 @@ company-info-finder/
 │   │   ├── FinancialMetrics.tsx
 │   │   ├── LeadershipInfo.tsx
 │   │   ├── RiskAssessment.tsx
-│   │   ├── ExportData.tsx
-│   │   └── DataSourceAttribution.tsx
-│   ├── services/       # Data services
-│   │   ├── companyService.ts        # Mock data service
-│   │   └── companyScraperService.ts # Web scraping service
+│   │   └── ExportData.tsx
+│   └── lib/            # Utility functions and API clients
 ├── .gitignore          # Git ignore file
 ├── next.config.js      # Next.js configuration
 ├── package.json        # Project dependencies
@@ -105,18 +99,8 @@ company-info-finder/
 └── tsconfig.json       # TypeScript configuration
 ```
 
-## Features and Capabilities
+## Future Enhancements
 
-### Current Features
-- Web scraping from multiple sources (Wikipedia, Yahoo Finance)
-- Intelligent data fallback strategy (scraped → cached → mock → generic)
-- Rate limiting and respectful scraping with proper headers
-- 24-hour data caching to reduce load on sources
-- Data source attribution for transparency
-- CSV export functionality
-- Interactive charts and visualizations
-
-### Future Enhancements
 - User accounts with saved companies
 - Real-time stock price integration
 - News sentiment analysis
