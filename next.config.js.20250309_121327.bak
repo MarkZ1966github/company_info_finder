@@ -3,11 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   serverRuntimeConfig: {
-    PORT: '9999',
+    PORT: '3500',
   },
   env: {
-    PORT: '9999',
-  }
+    PORT: '3500',
+  },
 };
 
-module.exports = nextConfig;;
+module.exports = nextConfig;
