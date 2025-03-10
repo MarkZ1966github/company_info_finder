@@ -6,15 +6,14 @@ import FinancialMetrics from './FinancialMetrics'
 import LeadershipInfo from './LeadershipInfo'
 import RiskAssessment from './RiskAssessment'
 import ExportData from './ExportData'
-import { getCompanyData } from '@/services/companyService'
+import DataSourceAttribution from './DataSourceAttribution'
+import { getCompanyData } from '@/services/companyScraperService'
 
 interface CompanyDashboardProps {
   companyName: string
 }
 
 // Company data is now managed by the companyService
-
-
 
 export default function CompanyDashboard({ companyName }: CompanyDashboardProps) {
   const [activeTab, setActiveTab] = useState('overview')
@@ -109,6 +108,9 @@ export default function CompanyDashboard({ companyName }: CompanyDashboardProps)
         {activeTab === 'financials' && <FinancialMetrics financials={companyData.financials} />}
         {activeTab === 'leadership' && <LeadershipInfo leadership={companyData.leadership} />}
         {activeTab === 'risk' && <RiskAssessment risk={companyData.risk} />}
+        
+        {/* Data Source Attribution */}
+        {companyData.dataSources && <DataSourceAttribution sources={companyData.dataSources} />}
       </div>
     </div>
   )
