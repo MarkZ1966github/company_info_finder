@@ -4,7 +4,7 @@ A comprehensive tool for researching companies, their leadership, financials, an
 
 ## Features
 
-- Search for any company by name
+- Search for any company by name and website URL
 - View detailed company information including:
   - Current and past leadership
   - Financial performance trends
@@ -23,7 +23,7 @@ A comprehensive tool for researching companies, their leadership, financials, an
 - **Styling**: Tailwind CSS
 - **Charts**: Chart.js with react-chartjs-2
 - **Data Export**: CSV
-- **Web Scraping**: Axios, Cheerio
+- **Web Scraping**: Server-side API with proxy
 - **Deployment**: AWS / SiteGround
 
 ## Getting Started
@@ -50,27 +50,36 @@ yarn install
 
 3. Start the development server:
 ```bash
-npm run dev
+./start-server
 # or
-yarn dev
+npm run dev
 ```
 
 4. Open your browser and navigate to [http://localhost:9999](http://localhost:9999)
+
+## Usage
+
+1. Enter a company name in the search bar (e.g., "Apple")
+2. Optionally provide the company's website URL for more accurate results (e.g., "apple.com")
+3. Click "Search" to retrieve company information
+4. Browse through the different tabs to explore various aspects of the company
+5. Use the "Export Data" button to download the information as a CSV file
 
 ## Available Companies
 
 The application can search for any company by scraping data from public sources. The following companies also have mock data available as fallbacks:
 
-- Apple Inc.
-- Microsoft Corporation
-- Amazon.com Inc.
-- Alphabet Inc. (Google)
-- Meta Platforms Inc. (Facebook)
-- Tesla, Inc.
-- NVIDIA Corporation
-- JPMorgan Chase & Co.
-- Johnson & Johnson
-- Walmart Inc.
+- Apple Inc. (apple.com)
+- Microsoft Corporation (microsoft.com)
+- Amazon.com Inc. (amazon.com)
+- Alphabet Inc. (Google) (google.com)
+- Meta Platforms Inc. (Facebook) (meta.com)
+- Tesla, Inc. (tesla.com)
+- NVIDIA Corporation (nvidia.com)
+- JPMorgan Chase & Co. (jpmorganchase.com)
+- Johnson & Johnson (jnj.com)
+- Walmart Inc. (walmart.com)
+- Unity (unity.com)
 
 ## Project Structure
 
@@ -81,6 +90,7 @@ company-info-finder/
 │   ├── app/            # Next.js app directory
 │   │   ├── api/        # API routes
 │   │   │   ├── search/ # Company search API
+│   │   │   ├── proxy/  # Proxy API for external requests
 │   │   │   └── company/# Company data API
 │   │   ├── layout.tsx  # Root layout component
 │   │   ├── page.tsx    # Home page component
@@ -100,6 +110,7 @@ company-info-finder/
 ├── .gitignore          # Git ignore file
 ├── next.config.js      # Next.js configuration
 ├── package.json        # Project dependencies
+├── server.js           # Server configuration
 ├── postcss.config.js   # PostCSS configuration
 ├── tailwind.config.js  # Tailwind CSS configuration
 └── tsconfig.json       # TypeScript configuration
@@ -109,6 +120,7 @@ company-info-finder/
 
 ### Current Features
 - Web scraping from multiple sources (Wikipedia, Yahoo Finance)
+- Server-side proxy for handling external requests
 - Intelligent data fallback strategy (scraped → cached → mock → generic)
 - Rate limiting and respectful scraping with proper headers
 - 24-hour data caching to reduce load on sources
@@ -124,6 +136,14 @@ company-info-finder/
 - Custom alerts for company events
 - Enhanced prediction models using machine learning
 - Mobile application
+
+## Troubleshooting
+
+If you encounter CORS issues or scraping problems:
+- Ensure the server is running correctly with `./start-server`
+- Check that both the Next.js frontend and proxy server are active
+- Try clearing your browser cache
+- Use the provided mock data companies for testing
 
 ## License
 
